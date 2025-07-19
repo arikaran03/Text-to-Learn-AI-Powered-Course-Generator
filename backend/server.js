@@ -1,26 +1,46 @@
 import express from 'express';
 import cors from 'cors'; 
-import courseRoutes from "./routes/courseRouter.js"; 
 import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import userRoutes from './routes/userRoutes.js';
+import courseRoutes from './routes/courseRouter.js'; 
+
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 const FRONT_END_URL = process.env.FRONTEND_URL;
 
+// Connect to MongoDB
+connectDB();
 
 // Middleware
 // Use CORS to allow requests from your React frontend
-app.use(cors({ origin: FRONT_END_URL })); // Adjust for your frontend URL
+const allowedOrigins = [
+  "https://45vz631c-5173.inc1.devtunnels.ms"
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // Routes
-app.use('/api', courseRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/courses', courseRoutes);
 
-// A simple base route
-app.get('/', (req, res) => {
-  res.send('Backend API is running!');
-});
 
 // Error handling middleware (optional but recommended)
 app.use((err, req, res, next) => {
