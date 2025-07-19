@@ -8,6 +8,7 @@ import LoginButton from './components/LoginButton';
 import LogoutButton from './components/LogoutButton';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { useAuth0 } from '@auth0/auth0-react';
+import LessonPage from './pages/LessonPage'; 
 
 function App() {
   const { isLoading } = useAuth0();
@@ -23,6 +24,7 @@ function App() {
           <Link to="/" style={{ marginRight: '10px' }}>Home</Link>
           <Link to="/courses" style={{ marginRight: '10px' }}>Courses (Protected)</Link>
           <Link to="/profile" style={{ marginRight: '10px' }}>Profile</Link>
+          <Link to="/lesson-example" style={{ marginRight: '10px' }}>Lesson Example</Link>
           <div style={{ float: 'right' }}>
             <LoginButton />
             <LogoutButton />
@@ -32,6 +34,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
           <Route path="/courses" element={<ProtectedRoute component={CoursesPage} />} />
+          <Route path="/lesson-example" element={<LessonPage />} />
         </Routes>
       </div>
     </Router>

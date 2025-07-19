@@ -1,4 +1,3 @@
-// ./hooks/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom';
 
 // This component now just checks auth and either renders its children or redirects.
