@@ -18,11 +18,11 @@ const LessonRenderer = ({ content }) => {
       case 'mcq':
         return <MCQBlock key={index} {...block} />;
       default:
-        return <div key={index} className="text-red-500">Unsupported block type: {block.type}</div>;
+        return <div key={index} className="error-message">Unsupported block type: {block.type}</div>;
     }
   };
 
-  return <div className="w-full max-w-3xl mx-auto py-8">{content.map(renderBlock)}</div>;
+  return <div className="lesson-content-wrapper">{content.map(renderBlock)}</div>;
 };
 
 export default LessonRenderer;

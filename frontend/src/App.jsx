@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CoursesPage from './pages/CoursesPage';
 import Profile from './components/Profile';
@@ -8,24 +7,28 @@ import LoginButton from './components/LoginButton';
 import LogoutButton from './components/LogoutButton';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { useAuth0 } from '@auth0/auth0-react';
-import LessonPage from './pages/LessonPage'; 
+import LessonPage from './pages/LessonPage';
+import './App.css'; // <-- IMPORT THE CSS FILE HERE
 
 function App() {
   const { isLoading } = useAuth0();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="loading-message">Loading Application...</div>;
   }
 
   return (
     <Router>
-      <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-        <nav style={{ marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
-          <Link to="/" style={{ marginRight: '10px' }}>Home</Link>
-          <Link to="/courses" style={{ marginRight: '10px' }}>Courses (Protected)</Link>
-          <Link to="/profile" style={{ marginRight: '10px' }}>Profile</Link>
-          <Link to="/lesson-example" style={{ marginRight: '10px' }}>Lesson Example</Link>
-          <div style={{ float: 'right' }}>
+      <div className="app-container">
+        <nav className="navbar">
+          <div className="nav-links">
+            {/* Use NavLink for active styles */}
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/courses">My Courses</NavLink>
+            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/lesson-example">Lesson Example</NavLink>
+          </div>
+          <div className="nav-auth">
             <LoginButton />
             <LogoutButton />
           </div>
