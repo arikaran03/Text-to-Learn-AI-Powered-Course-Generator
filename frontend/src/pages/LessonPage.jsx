@@ -13,10 +13,8 @@ function LessonPage() {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen font-sans">
-      <div className="container mx-auto px-4">
-        <LessonRenderer content={lessonContent} />
-      </div>
+    <div className="lesson-container">
+      <LessonRenderer content={lessonContent} />
     </div>
   );
 }

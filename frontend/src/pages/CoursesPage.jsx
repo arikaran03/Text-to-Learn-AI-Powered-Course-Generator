@@ -33,18 +33,18 @@ const CoursesPage = () => {
   }, [getAccessTokenSilently]);
 
   return (
-    <div>
+    <div className="courses-page">
       <h1>Protected Courses</h1>
       <p>Only logged-in users can see this page and its content.</p>
       
-      {error && <div style={{ color: 'red' }}>Error: {error}</div>}
+      {error && <div className="error-message">Error: {error}</div>}
       
       {courses ? (
-        <ul>
-          {courses.map(course => <li key={course.id}>{course.title}</li>)}
+        <ul className="courses-list">
+          {courses.map(course => <li className="course-item" key={course.id}>{course.title}</li>)}
         </ul>
       ) : (
-        <p>Loading courses...</p>
+        <p className="loading-message">Loading courses...</p>
       )}
     </div>
   );
